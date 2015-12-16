@@ -1,0 +1,29 @@
+{
+  "siteName": "G-landia.com",
+  "db": {
+    "host": "217.71.226.187",
+    "port": "3306",
+    "name": "glandia",
+    "user": "glandia",
+    "password": "W5u3SccMGwTYn3eH"
+  },
+  "session": {
+    "secret": "it:demo:secret",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": null
+    }
+  },
+  "mainTemplate": "content/index",
+  "smtp": {
+    "user": "check@g-landia.com",
+    "password": "doGoodbeGood2015",
+    "host": "smtp.yandex.ru",
+    "port": 465,
+    "fromName": "G-Landia",
+    "useSSL": true
+  },
+  "registrationKey": "someKey"
+}

@@ -1,0 +1,33 @@
+{
+  "siteName": "G-Landia.com",
+  "language": "Language",
+  "menu": "Menu",
+  "country": "Country",
+  "city": "City",
+  "about": "About",
+  "joinGolympicsRightNow": "JOIN G-OLYMPICS RIGHT NOW!",
+
+  "______Auth message__________": "",
+  "login": "Login",
+  "password": "Password",
+  "email": "Email",
+  "out": "Out",
+
+  "_______Registration massage_____": "",
+  "registration": "Registration",
+  "signUp": "Sign up",
+  "confirmPassword": "Confirm password",
+  "confirmationOfRegistration": "Confirmation of registration",
+
+
+  "_________Help message_______": "",
+  "pleaseEnterYourPassword": "Please enter your password",
+  "pleaseEnterYourEmail": "Please enter your email",
+  "pleaseEnterYourName": "Please enter your name",
+  "pleaseSelectYourAge": "Please select your age",
+
+  "________Errors message______": "",
+  "errorLogin": "Wrong login or password",
+  "errorPasswordMismatch": "Password Mismatch"
+
+}

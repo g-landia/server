@@ -1,0 +1,32 @@
+{
+  "siteName": "G-Landia.com",
+  "language": "Язык",
+  "menu": "Меню",
+  "country": "Страна",
+  "city": "Город",
+  "about": "О нас",
+  "joinGolympicsRightNow": "ПРИСОЕДИНЯЙСЯ к G - ОЛИМПИАДЕ ПРЯМО СЕЙЧАС!",
+
+  "______Auth message__________": "",
+  "login": "Войти",
+  "password": "Пароль",
+  "email": "Email",
+  "out": "Выйти",
+
+  "_______Registration massage_____": "",
+  "registration": "Регистрация",
+  "signUp": "Зарегистрироваться",
+  "confirmPassword": "Повторите пароль",
+  "confirmationOfRegistration": "Подтверждение регистрации",
+
+
+  "_________Help message_______": "",
+  "pleaseEnterYourPassword": "Пожалуйста введите сюда ваш пароль",
+  "pleaseEnterYourEmail": "Пожалуйста введите сюда email",
+  "pleaseEnterYourName": "Пожалуйста введите сюда свое имя",
+  "pleaseSelectYourAge": "Пожалуйста укажите свой возраст",
+
+  "________Errors message______": "",
+  "errorLogin": "Неверный логин или пароль",
+  "errorPasswordMismatch": "Пароли не совпадают"
+}
