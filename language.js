@@ -93,6 +93,7 @@ var wrap = function(req, res, option){
         );
         return;
     } else {
+        //add session guest
         req.session.guest = {"ln": query.ln};
         language = query.ln
     }

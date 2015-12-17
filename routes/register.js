@@ -3,7 +3,7 @@ var express = require('express')
     ,gText = require('../language')
     ,wrapLang = gText.wrap
     ,authService = require('../plugins/users/authService.js');
-
+/*
 router.post('/', function(req, res){
 	authService.register(req,res,function(status,msg){
 		if (status) {
@@ -14,24 +14,37 @@ router.post('/', function(req, res){
 			console.log(msg);
 		}
 
-
 	});
     res.redirect('/');
-});
+});*/
+
 
 var template = "content/register";
 router.get('/', function (req, res){
+        if (req.isAuthenticated()) {
+            res.redirect('/');
+            return;
+        }
         wrapLang(req, res, {
                 template: template,
                 data: {
                     content: {
-                        error: ""
+                        error: req.flash('error')[0]
                     }
                 }
             }
         );
     }
 );
+
+router.post('/', authService.authenticate('register', {
+        successRedirect: '/',
+        failureRedirect: '/register',
+        failureFlash: true
+    })
+);
+
+
 
 module.exports = router;
 

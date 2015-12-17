@@ -10,10 +10,13 @@
   "session": {
     "secret": "it:demo:secret",
     "key": "sid",
+    "resave": false,
+    "saveUninitialized": true,
     "cookie": {
       "path": "/",
       "httpOnly": true,
-      "maxAge": null
+      "maxAge": null,
+      "ecure": true
     }
   },
   "mainTemplate": "content/index",

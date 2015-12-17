@@ -10,22 +10,24 @@ var mysql = require('mysql')
         host: confDb.host,
         user: confDb.user,
         password: confDb.password,
-        database: confDb.name
+        database: confDb.name,
+        connectionLimit: 300
     }
-    ,pool;
+    ,pool = mysql.createPool(DB);
 
+//////////////////////////////////////////////////////////////
 var connect = function(option){
     var opt = (option)? option: confDb;
 
     pool = mysql.createPool(opt);
 };
 
-var getInstance = function() {
+/*var getInstance = function() {
     if (!pool) {
         throw new Error('Connect the pool first');
     }
     return pool;
-};
+};*/
 /*withDb - it works as a wrapper
 * example:
 *
@@ -52,9 +54,46 @@ var withDb = function(option, func){
         }
     );
 };
+////////////////////////////////////////////////////////
+
+var query = function (method, tableOrSql, props) {
+    return new Promise(function (resolve, reject) {
+        pool.getConnection(function (err, connection) {
+            // Adding mysql extra options
+            mysqlUtilities.upgrade(connection);
+            mysqlUtilities.introspection(connection);
+            // Query data and return promise
+            if (typeof connection[method] == 'function') {
+                 // query  SQL
+                if(typeof props === 'object') {
+                    connection[method](tableOrSql, props, function(err, res){
+                        if (err) reject(err);
+                        else resolve(res);
+                    });
+                 // metadata table
+                }else if(typeof props === 'undefined'){
+                    connection[method](tableOrSql, function(err, res){
+                        if (err) reject(err);
+                        else resolve(res);
+                    });
+                 // info database
+                }else if(typeof tableOrSql === 'undefined'){
+                    connection[method](function(err, res){
+                        if (err) reject(err);
+                        else resolve(res);
+                    });
+                }
+            } else {
+                reject('Incorrect query method');
+            }
+            connection.release();
+        });
+    });
+};
 
 exports.connect = connect;
 //exports.getInstance = getInstance;
 //exports.pool = pool;
 exports.withDb = withDb;
 exports.mainDB = DB;
+exports.query = query;

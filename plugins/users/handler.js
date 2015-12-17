@@ -3,6 +3,7 @@ var jade = require('jade');
 var passport = require('passport');
 var authPassport = require('./authPassport');
 var signUpPassport = require('./authPassport');
+var authService = require('./authService');
 
 
 
@@ -32,6 +33,7 @@ var handler = function(){
 
 exports.authPassport = authPassport;
 exports.signUpPassport = signUpPassport;
+exports.authService = authService;
 
 
 

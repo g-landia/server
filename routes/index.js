@@ -13,11 +13,14 @@ router.get('/', function(req, res) {
 
     //res.render(mainTemplate, {getText: gText.language("ru")});
 
+
+
     gText.wrap(req, res, {
         template: mainTemplate,
         data: {
             //this key in the template
             title: "Hello",
+            req: req,
             content: {
                 exampleKey: "info"
             }

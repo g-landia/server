@@ -1,9 +1,12 @@
-extends layout
+//extends layout
 
 block header
-    include includes/index/navbar
+    include includes/index/header
 
-block content
+block login
+    //Login block
+    h2= JSON.stringify(req.session)
+    h2= JSON.stringify(the._passport)
     div(class='page-header')
         form(class="form-horizontal" role="form" method='post' action="/login")
             div(class='alert-warning')= getText(content.error)
@@ -24,6 +27,3 @@ block content
             b Email: admin@mail.ru
         p
             b Password: admin
-
-block footer
-    include includes/index/footer

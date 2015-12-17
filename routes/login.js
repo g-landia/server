@@ -4,7 +4,7 @@ var express = require('express')
     ,router = express.Router()
     ,config = require('nconf')
     ,userHandler = require('../plugins/users/handler')
-    ,authPassport = userHandler.authPassport
+    ,authService = userHandler.authService
     ,template = "content/login"
     ,gText = require('../language')
     ,wrapLang = gText.wrap;
@@ -17,13 +17,16 @@ router.get('/', function (req, res) {
         res.redirect('/');
         return;
     }
-
     wrapLang(req, res,{
+
             template: template,
             data: {
                 title: "login",
+                the: this,
+                req: req,
                 content: {
                     error: req.flash('error')[0] //this key error from flash
+
                 }
             }
         }
@@ -31,10 +34,18 @@ router.get('/', function (req, res) {
 });
 
 
-router.post('/', authPassport.authenticate('login', {
-        successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: true })
+router.post('/', authService.authenticate('login', {failureFlash: true, failureRedirect: '/login'}), function(req, res){
+
+        var regStatus = req.user.regStatus;
+        if(regStatus === 'waiting' || undefined){
+            res.redirect('/seeEmail');
+            return;
+        } else if(regStatus === "lastStep"){
+            res.redirect('/lastStep');
+            return;
+        }
+        res.redirect('/');
+    }
 );
 
 
