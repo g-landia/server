@@ -1,0 +1,57 @@
+doctype html
+//[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]
+//[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]
+//[if IE 9 ]><html class="no-js ie ie9" lang="en"> <![endif]
+//[if (gte IE 8)|!(IE)]>
+html.no-js(lang='en')
+    //<![endif]
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='description', content='')
+        meta(name='author', content='')
+        title Admin
+        //Bootstrap core CSS
+        //link(href="lib/bootstrap/css/bootstrap.min.css" rel='stylesheet')
+        link(href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel='stylesheet')
+        //link(href="lib/bootstrap/css/bootstrap-theme.min.css" rel='stylesheet')
+
+
+        style.
+            body {
+                padding-top: 50px;
+            }
+            header {}
+            #content {
+
+            }
+            .fixed_block {
+                position: fixed;
+            }
+            .table_language {
+                width: 100%;
+            }
+            .table_language .first_td {
+                width: 30%;
+            }
+            .table_language .last_td {
+                width: 5%;
+            }
+            .border {
+                border-bottom: 1px solid #000000;
+                border-left: 1px solid #000000;
+            }
+            .remove_button {
+                background-color: red;
+            }
+
+
+
+    body
+
+        block header
+        block content
+        block footer
+        block javascript
+

@@ -23,7 +23,7 @@
     "emailjs": "^1.0.1",
     "md5": "^2.0.0",
     "mysql-utilities": "~1.0.8",
-    "mysql": "2.5.x",
+    "mysql": "2.10.x",
     "node-serialize": "0.0.4"
   }
 }

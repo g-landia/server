@@ -19,7 +19,12 @@
       "ecure": true
     }
   },
-  "mainTemplate": "content/index",
+  "templates": {
+    "content": "content/index",
+    "admin": "admin/index",
+    "not_found": "not_found/default",
+    "error": ""
+  },
   "smtp": {
     "user": "check@g-landia.com",
     "password": "doGoodbeGood2015",

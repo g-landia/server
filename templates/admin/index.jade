@@ -1,0 +1,120 @@
+extends layout
+
+
+/// MIXINS
+mixin option(value, selected, language)
+    if value == selected
+        option(value='#{value}' selected)= language
+    else
+        option(value='#{value}')= language
+
+
+
+// END MIXIN
+
+
+
+
+block header
+    .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        .container
+            .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href='#') G
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.active
+                        a(href='#') Language
+
+block content
+    #content.container
+        #languages
+            .row
+                .col-xs-12
+                    button#addNewKey.btn.btn-success(type='button') Add New Key
+            //p= JSON.stringify(query)
+            //p= JSON.stringify(body)
+            form
+                .row
+                        .col-xs-12
+                            .col-xs-1 ID
+                            .col-xs-2 Name key
+                            .col-xs-4
+                                select.form-control(onchange="if (this.selectedIndex) this.form.submit ()" name='first_lang')
+                                    option(value='en') Select language
+                                    +option('en', query.first_lang, 'English')
+                                    +option('ru', query.first_lang, 'Русский')
+                                    +option('de', query.first_lang, 'Deutsch')
+                                    +option('fr', query.first_lang, 'Français')
+                                    +option('sp', query.first_lang, 'Español')
+                                    +option('pt', query.first_lang, 'Português')
+                                    +option('it', query.first_lang, 'Italiano')
+                            .col-xs-4
+                                select.form-control(onchange="if (this.selectedIndex) this.form.submit ()" name='second_lang')
+                                    option(value='ru') Select language
+                                    +option('en', query.second_lang, 'English')
+                                    +option('ru', query.second_lang, 'Русский')
+                                    +option('de', query.second_lang, 'Deutsch')
+                                    +option('fr', query.second_lang, 'Français')
+                                    +option('sp', query.second_lang, 'Español')
+                                    +option('pt', query.second_lang, 'Português')
+                                    +option('it', query.second_lang, 'Italiano')
+
+                            .col-xs-1
+                                input(type='submit' value='Update All')
+
+            .row.warning= err.errDb
+                //#{JSON.stringify(req.url)}
+            #list_data.row
+                for k in text
+
+                    form(method='POST').col-xs-12
+                        .col-xs-1= k.id
+
+                        .col-xs-2
+                            input(type='hidden' name='id' value='#{k.id}')
+                            input(type='text' name='name' required value='#{k.name}').form-control
+                        .col-xs-4
+                            textarea.form-control(name='#{query.first_lang}')= k[query.first_lang]
+                        .col-xs-4
+                            textarea.form-control(name='#{query.second_lang}')= k[query.second_lang]
+                        .col-xs-1
+                            input(data-button-save='#{k.id}' name='action' type='submit' value='save').btn.btn-primary.btn-xs
+                            input(data-button-remove='#{k.id}' name='action' type='submit' value='remove').btn.btn-danger.btn-xs
+
+
+
+
+block javascript
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='lib/bootstrap/js/bootstrap.min.js')
+    script.
+        var fieldKey =
+                '<form method="POST" class="col-xs-12">' +
+                    '<div class="col-xs-1">NEW</div>' +
+                    '<div class="col-xs-2">' +
+                        '<input type="text" name="name" required class="form-control">' +
+                    '</div>' +
+                    '<div class="col-xs-4">' +
+                        '<textarea name="en" class="form-control"></textarea></div>' +
+                    '<div class="col-xs-4">' +
+                        '<textarea name="ru" class="form-control"></textarea></div>' +
+                    '<div class="col-xs-1">' +
+                        '<input data-button-save="new" name="action" type="submit" value="add_key" class="btn btn-primary btn-xs">' +
+                '   </div>' +
+                '</form>'
+
+        $('[data-button-save]').click(function(e){
+            console.log(e)
+        })
+        $('[data-button-remove]').click(function(e){
+            console.log(e);
+            //alert(e);
+        })
+        $('#addNewKey').click(function(e){
+            $('#list_data').prepend(fieldKey)
+        })

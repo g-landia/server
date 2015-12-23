@@ -4,8 +4,11 @@
 
 //files language
 
-var En = require('./languages/en.json')
-    ,Ru = require('./languages/ru.json');
+/*var En      = require('./languages/en.json')
+    ,Ru     = require('./languages/ru.json'),*/
+var    db      = require('./db');
+
+
 
 
 /*
@@ -14,21 +17,27 @@ var En = require('./languages/en.json')
 *       en: - English
 *       ru: - Russian
 *       de: - Deutsch
+*       fr: - French
 *       sp: - Spanish
-*       por: - Portugal
+*       pt: - Portugal
+*       it: - Italian
 * */
+//////////////////////////////////////////////////
 
+/*var langObj = {}; //Global objects
 
-var langObj = {}; //Global objects
 
 
 var addLanguage = function(lang, requireFile){
     langObj[lang] = requireFile
-};
+};*/
 
-var getText = function(language){
-   /* var language = (typeof req_or_lang !== 'object')? req_or_lang
-        : req_or_lang; //taken from session or url req. ,,,*/
+/*
+var getTexts = function(language){
+   */
+/* var language = (typeof req_or_lang !== 'object')? req_or_lang
+        : req_or_lang; //taken from session or url req. ,,,*//*
+
     return function(keyText, errOff, langIn){
         var lang = (langIn !== undefined && langIn !== false)? langIn: language;
         var val = (langObj[lang])? langObj[lang][keyText]: undefined;
@@ -43,16 +52,32 @@ var getText = function(language){
         }
     }
 };
+*/
 
+////////////////////
+
+var getText = function(language){
+    return function(keyText, langIn) {
+        var val = db.langObj[keyText]
+            ,lang = (langIn)? langIn: language
+            ,text = (val)? val[lang]:'';
+        if(!text){
+            var valEn = (val)? val['en']: '';      //if no text in the selected language, then english
+            return (valEn)? valEn
+                : (!keyText)? ''        //if  empty keyText, then return ''
+                : '%' + keyText + '%';   //if not english, then return name key: '%nameKey%' - language and key is not defined
+        } else return text
+    }
+};
 
 var getFromSession = function (req) {
-    var passport = req.session.passport
+    var passport = req.user
         ,guest = req.session.guest
         ,language = (typeof passport === 'object')
-            ? JSON.parse(passport.user)['language']
+            ? passport.language                 //if user is authorized, then language from passport
             : (typeof  guest === 'object')
-            ? guest.ln
-            : "en";
+            ? guest.ln                          //if user is guest, then language from session guest
+            : "en";                              //if user guest is undefined , then language is default - en
     console.log(language);
     return language
 };
@@ -74,21 +99,22 @@ example
 */
 
 
-var wrap = function(req, res, option){
+var renderWrap = function(req, res, option){
     var query = req.query
         ,headers = req.headers
-        ,passport = req.session.passport
+        ,passport = req.user
         ,guest = req.session.guest
         ,language;
-    if(typeof passport === 'object' && typeof passport.user === 'string'){
-        language = JSON.parse(passport.user)['language']
+    if(typeof passport === 'object'){
+        language = passport.language;//
     } else if(typeof guest === 'object'){
         language = guest.ln
     } else if(!query.ln){
         //opened the page. In the page redirecting to home page http://hostName/?ln=nameLanguageFromBrauser
         res.render('content/getlanguage', {
                 host: "'" + headers.host + "'",
-                req: req
+                req: req,
+                err: req.flash
             }
         );
         return;
@@ -99,13 +125,14 @@ var wrap = function(req, res, option){
     }
 
 
-    if(query.ln !== undefined && ((passport === undefined ) || (typeof  passport === 'object' && passport.user === undefined))){
+    if(query.ln !== undefined && (passport === undefined)){
         req.session.guest = {"ln": query.ln};
         language = query.ln
     }
     if(typeof  option.data == 'object') {
-        option.data.getText = getText(language); // aded key getText
+        option.data.getText = getText(language); // added key getText
         option.data.req = req;
+        option.data.err = req.flash;
     }
        // console.log(option.data.req);
     res.render(option.template, option.data);
@@ -116,11 +143,11 @@ var wrap = function(req, res, option){
 
 
 //added gText in Global objects
-addLanguage('en', En);
-addLanguage('ru', Ru);
+/*addLanguage('en', En);
+addLanguage('ru', Ru);*/
 
-exports.addLanguage = addLanguage;
+//exports.addLanguage = addLanguage;
 exports.language = getText;
-exports.wrap = wrap;
+exports.renderWrap = renderWrap;
 exports.getLanguageFromSession = getFromSession;
-exports.obj = langObj;
+//exports.obj = langObj;

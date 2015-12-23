@@ -1,0 +1,81 @@
+doctype html
+html.no-js(lang='en')
+    // <![endif]
+    head
+        //
+          - Basic Page Needs
+          ==================================================
+        meta(charset='utf-8')
+        title G-Landia - 404
+        meta(name='description', content='')
+        meta(name='author', content='inkyotogrand')
+        //
+          Mobile Specific Metas
+          ==================================================
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        //
+          CSS
+          ==================================================
+        link(rel='stylesheet', href='css/default.css')
+        link(rel='stylesheet', href='css/layout.css')
+        link(rel='stylesheet', href='css/media-queries.css')
+        link(rel='stylesheet', href='css/animate.css')
+        //
+          Script
+          ==================================================
+        script(src='js/modernizr.js')
+        //
+          Favicons
+          ==================================================
+        link(rel='shortcut icon', href='favicon.ico')
+    body
+        header
+            .logo
+                a.smoothscroll(href='/')
+                    img(alt='logo', src='images/logo.png')
+            nav#nav-wrap
+                a.mobile-btn(href='#nav-wrap', title='Show navigation') Show Menu
+                a.mobile-btn(href='#', title='Hide navigation') Hide Menu
+                ul#nav.nav
+                    li
+                        a.smoothscroll(href='/#about') About G-Landia
+                    li
+                        a.smoothscroll(href='/#inspiration') Why Join?
+                    li
+                        a.smoothscroll(href='faq.html') F.A.Q
+                    li
+                        a.smoothscroll(href='/#subscribe') Join Us
+        section#main
+            .row
+                .six.columns
+                    .main-text
+                        br
+                        h1 404
+                        h5 This page could not be found!
+                        h4 We are really, really sorry.
+                        small
+                            a(href='/')
+                                | Return to homepage
+                                i.fa.fa-angle-double-right
+                .four.pull-left.columns.main-media
+                    img(src='images/feature-image-6.png', alt='error')
+        section#footer
+            footer
+                p.copyright © 2015 G-Landia | Made in St-Petersburg, Russia
+        //
+          Java Script
+          ==================================================
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+        script.
+            window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\\/script>')
+        script(type='text/javascript', src='js/jquery-migrate-1.2.1.min.js')
+        // Accordion.js
+        script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+        script(src='js/index.js')
+        // Accordion.js End
+        script(src='js/jquery.flexslider.js')
+        script(src='js/waypoints.js')
+        script(src='js/jquery.fittext.js')
+        script(src='js/jquery.fitvids.js')
+        script(src='js/imagelightbox.js')
+        script(src='js/main.js')

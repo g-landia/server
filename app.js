@@ -21,7 +21,10 @@ app.set('views', path.join(__dirname, '/templates'));
 
 
 var templateError = 'errors/error'
-    ,sessionData = config.get('session');
+    ,sessionData = config.get('session')
+    ,templates = config.get('templates')
+    ,not_foundTemplate = templates.not_found;
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -46,7 +49,8 @@ app.use('/users', require('./routes/users'));
 app.use('/register', require('./routes/register'));
 app.use('/logout', require('./routes/logout'));
 app.use('/profile', require('./routes/profile'));
-app.use('/*', require('./routes/index'));
+app.use('/admin', require('./routes/admin'));
+app.use('/', require('./routes/index'));
 
 
 
@@ -57,9 +61,12 @@ app.use('/*', require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    res.render(
+        not_foundTemplate , {}
+    );
+    next(err);
 });
 
 // error handlers
@@ -67,23 +74,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res) {
-    res.status(err.status || 500);
-    res.render(templateError, {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render(templateError, {
+        message: err.message,
+        error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.render(templateError, {
-    message: err.message,
-    error: {}
-  });
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render(templateError, {
+        message: err.message,
+        error: {}
+    });
 });
 
 

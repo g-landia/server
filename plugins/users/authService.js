@@ -1,13 +1,20 @@
 var md5             = require('md5')
     ,config         = require('nconf')
     ,gText          = require('../../language')
-    //,sendMessage    = require("./sendMessage")
+    ,sendMessage    = require("./sendMessage")
     ,salt           = config.get('registrationKey') || 'someDefaultKey'
     ,LocalStrategy   = require('passport-local').Strategy
     ,passport = require('passport')
     ,db             = require('../../db');
 
-/*var authService = {
+var authService = {
+    login: function(req, res, calback){
+        var email = req.body.email || ''
+            ,password = req.body.password || '';
+
+
+
+    },
 	register: function(req, res, callback) {
         var language = gText.getLanguageFromSession(req)
             ,text = gText.language(language)
@@ -56,7 +63,7 @@ var md5             = require('md5')
 	check: function(req, res, callback) {
 
 	}
-};*/
+};
 
 passport.use('login', new LocalStrategy({
         passReqToCallback : true,
@@ -72,7 +79,6 @@ passport.use('login', new LocalStrategy({
 
         db.query('queryRow', 'SELECT * FROM `users` WHERE `email` = ?', [email])
             .then(function (user) {
-                // if query was successful
                 if (md5(password) === user.password) {
                     console.log(user);
                     if(user.authToken.length !== 0){ //user goes to page with information: see your email
@@ -91,7 +97,8 @@ passport.use('login', new LocalStrategy({
                         return done(null, {
                             regStatus: 'registered',
                             username: user.firstName,
-                            language: user.language //data the session
+                            language: user.language,
+                            rights: user.rights//data the session
                             //here you need to add data for the session
                         });
                     }

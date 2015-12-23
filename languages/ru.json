@@ -28,5 +28,6 @@
 
   "________Errors message______": "",
   "errorLogin": "Неверный логин или пароль",
-  "errorPasswordMismatch": "Пароли не совпадают"
+  "errorPasswordMismatch": "Пароли не совпадают",
+  "errorEmailExists": "Эта электронная почта уже зарегистрирована"
 }

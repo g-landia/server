@@ -28,6 +28,7 @@
 
   "________Errors message______": "",
   "errorLogin": "Wrong login or password",
-  "errorPasswordMismatch": "Password Mismatch"
+  "errorPasswordMismatch": "Password Mismatch",
+  "errorEmailExists": "This email is already registered"
 
 }

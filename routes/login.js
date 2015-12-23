@@ -7,7 +7,8 @@ var express = require('express')
     ,authService = userHandler.authService
     ,template = "content/login"
     ,gText = require('../language')
-    ,wrapLang = gText.wrap;
+
+    ,renderWithLang = gText.renderWrap;
 
 
 
@@ -17,7 +18,7 @@ router.get('/', function (req, res) {
         res.redirect('/');
         return;
     }
-    wrapLang(req, res,{
+    renderWithLang(req, res,{
 
             template: template,
             data: {
@@ -25,7 +26,7 @@ router.get('/', function (req, res) {
                 the: this,
                 req: req,
                 content: {
-                    error: req.flash('error')[0] //this key error from flash
+                    error: req.flash('error') //this key error from flash
 
                 }
             }

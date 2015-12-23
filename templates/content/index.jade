@@ -1,20 +1,231 @@
 extends layout
 
-block header
-    include includes/index/header
-block homepage
-    include includes/index/homepage
-block inspiration
-    include includes/index/inspiration
-block about
-    include includes/index/about
-block subscribe
-    include includes/index/subscribe
-block goals
-    include includes/index/goals
-block callToAction
-    include includes/index/callToAction
-block javaScript
-    include includes/index/javaScript
-block footer
-    include includes/index/footer
+// MIXIN
+mixin adminMenu()
+    if req.user
+        if req.user.rights == 'root'
+            li
+                a.smoothscroll(href='/admin?first_lang=en&second_lang=ru')!= getText('admin')
+
+mixin loginMenu()
+    if !req.user
+        ul.header-social
+            li
+                a(href='/login' style='color: #FFFFFF;')= getText('login')
+    else
+        ul.header-social
+            li
+                a(href='/logout' style='color: #FFFFFF;')= getText('logout')
+
+
+
+/// END MIXIN
+
+block content
+    body
+    header
+        .logo
+            a.smoothscroll(href='#main')
+                img(alt='', src='images/logo.png')
+        nav#nav-wrap
+            a.mobile-btn(href='#nav-wrap', title='Show navigation') Show Menu
+            a.mobile-btn(href='#', title='Hide navigation') Hide Menu
+            ul#nav.nav
+                li
+                    a.smoothscroll(href='#inspiration')!= getText('whyJoin')
+                li
+                    a.smoothscroll(href='#about')!= getText('about')
+                li
+                    a.smoothscroll(href='faq.html')!= getText('faq')
+                li
+                    a.smoothscroll(href='#subscribe')!= getText('joinUs')
+                +adminMenu()
+        +loginMenu()
+    section#main
+        .row
+            .seven.columns
+                .main-text
+                    h1.responsive-headline= getText('welcomeToGlandia')
+                    p!= getText('welcomeToGlandiaDescription')
+                .buttons
+                    a.button.subscribe.smoothscroll(href='#subscribe') Join Today
+                    a.button.learn-more.smoothscroll(href='#inspiration') Learn More
+            .five.columns.main-media
+                img(src='images/global-image.png', alt='')
+    section#inspiration
+        .row.content
+            .text-container
+                .twelve.columns
+                    h1 Why do people join G-Landia?
+                .twelve.columns.flex-container
+                    .flexslider
+                        ul.slides
+                            li
+                                blockquote
+                                    p To benefit themselves.
+                            li
+                                blockquote
+                                    p To welcome more motivators.
+                            li
+                                blockquote
+                                    p To improve the world we live in.
+    section#about
+        .row.feature.steps
+            .six.columns.right
+                h3 How does G-Landia work?
+                p
+                    | The first project is
+                    b G-Olympic Games
+                    | .
+                p
+                    | Just follow
+                    b 3
+                    |  easy steps and choose your:
+                p
+                    | 1.
+                    b New qualities
+                    |  and
+                    b goals
+                    | .
+                p
+                    | 2.
+                    b Motivators
+                    |  willing to support you.
+                p
+                    | 3.
+                    b Charity Funds
+                    |  helping our planet (optional).
+                p
+                    | By playing
+                    b G-Olympics
+                    | , you will get
+                    b Gs
+                    |  (rewards) which you will use for different purposes.
+            .six.columns.feature-media.left
+                img(src='images/feature-image-1.png', alt='steps')
+        .row.feature.choose
+            .six.columns.left
+                h3 Choosing Your Personal Goals
+                p
+                    b “Conquer yourself and you will win thousands of battles”
+                p
+                    | We want you to succeed and always be inspired by your
+                    b goals
+                    | .
+                p
+                    | Be it giving up smoking, losing weight or traveling the world - it doesn't matter!
+                p
+                    | What matters is your
+                    b will
+                    |  to change and be
+                    b better
+                    | !
+            .six.columns.feature-media.right
+                img(src='images/feature-image-2.png', alt='goals')
+        .row.feature.motivators
+            .six.columns.right
+                h3 Choosing Motivators that Care
+                p 21-st century has brought new challenges to the world.
+                p
+                    | USD 1 trillion spent annually on advertising gives people not just another unneeded expense, but is also seen as a source of irritation and unsatisfaction. Many advertised goods and services are not appropriate for people, others are simply not affordable. Not being able to know people's
+                    b real wishes
+                    |  and
+                    b needs
+                    |  makes marketing inefficient and very expensive.
+                p
+                    | The future of any organization depends on how
+                    b wealthy
+                    | ,
+                    b succesfull
+                    | ,
+                    b long-living
+                    |  and
+                    b brand-loyal
+                    |  its clients are!
+                p
+                    | G-Landia handles your
+                    b choices
+                    |  and sends them directly to your
+                    b motivators
+                    | .
+                p
+                    | To those offering better motivation to People, G-Landia will give highest rates and
+                    b FREE VIP
+                    |  spots for their logos (links) to be seen globally.
+            .six.columns.feature-media.left
+                img(src='images/feature-image-3.png', alt='motivators')
+        .row.feature.charities
+            .six.columns.left
+                h3 Choosing Funds that Care (optional)
+                p
+                    i “The more you share, the more the World shares with you”
+                p
+                    | We invite you to support
+                    b funds
+                    |  that you believe help the most.
+                p
+                    | You then decide on a contribution that will be
+                    b donated
+                    |  every time you break a promise or goal.
+                p
+                    | Why do
+                    b G-People
+                    |  tackle problems such as:
+                    br
+                    |  Pollution, child mortality, diseases, starvation, animal extinction and many more?
+                p
+                    | - Because they
+                    b care
+                    |  and are able to
+                    b redirect
+                    |  some of their money saved by wise-spending.
+            .six.columns.feature-media.left
+                img(src='images/feature-image-4.png', alt='charities')
+    section#subscribe
+        .row.section-head
+            .twelve.columns
+                h1 Welcome to G-Olympics!
+                p
+                    | You are just one step away from your
+                    b new world
+                    | !
+        .row
+            .twelve.columns
+                #mc_embed_signup
+                    form#mc-embedded-subscribe-form.validate(action='', method='', name='mc-embedded-subscribe-form', target='_blank', novalidate='')
+                        input#mce-EMAIL.email(type='email', value='', name='EMAIL', placeholder='Your E-mail', required='')
+                        div(style='position: absolute; left: -5000px;')
+                            input(type='text', name='b_cdb7b577e41181934ed6a6a44_e65110b38d', value='')
+                        .clear
+                            input#mc-embedded-subscribe.button(type='submit', value='Join', name='subscribe')
+                p
+                    small
+                        | By joining, you confirm you have read and accepted our
+                        a(href='terms.html') Terms & Conditions
+                        | .
+    section#call-to-action
+        .row
+            .two.columns.header-col
+                img(src='images/donate.png')
+            .eight.columns.pull-right
+                h2 Support the project.
+                p
+                    | G-Landia is a voluntary non-profit project and we welcome any of your ideas, initiatives and any kind of support.
+                    br
+                    | Please drop us a
+                    a(href='', style='color:#3a5795')
+                        | line!
+                        a
+    section#footer
+        footer
+            p.copyright © 2015 G-Landia | Made in St-Petersburg, Russia
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script.
+        window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\\/script>')
+    script(type='text/javascript', src='js/jquery-migrate-1.2.1.min.js')
+    script(src='js/jquery.flexslider.js')
+    script(src='js/waypoints.js')
+    script(src='js/jquery.fittext.js')
+    script(src='js/jquery.fitvids.js')
+    script(src='js/imagelightbox.js')
+    script(src='js/main.js')

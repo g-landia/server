@@ -3,11 +3,13 @@ var express = require('express')
     ,config = require('nconf')
     ,db = require('../db')
     ,gText = require('../language')
+
+    ,renderWithLang = gText.renderWrap
     ,profileTemplate = 'content/profile';
 
 
 router.get('/', function(req, res){
-   gText.wrap(req, res, {
+    renderWithLang(req, res, {
        template: profileTemplate,
        data: {
 

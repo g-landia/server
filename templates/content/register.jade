@@ -2,7 +2,6 @@ extends  layout
 
 
 block header
-    include includes/index/navbar
 block content
     div(class="container theme-showcase" role="main")
         div(id="login-overlay" class="modal-dialog")
@@ -29,6 +28,3 @@ block content
                                     div(id="loginErrorMsg" class="alert alert-error hide")= getText('errorPasswordMismatch')
                                     button(class="btn btn-default btn-block center" type='submit')= getText('signUp')
 
-
-block footer
-    include includes/index/footer

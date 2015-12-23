@@ -1,7 +1,7 @@
 var express = require('express')
     ,router = express.Router()
     ,gText = require('../language')
-    ,wrapLang = gText.wrap
+    ,renderWithLang = gText.wrap
     ,authService = require('../plugins/users/authService.js');
 /*
 router.post('/', function(req, res){
@@ -20,12 +20,13 @@ router.post('/', function(req, res){
 
 
 var template = "content/register";
+
 router.get('/', function (req, res){
         if (req.isAuthenticated()) {
             res.redirect('/');
             return;
         }
-        wrapLang(req, res, {
+        renderWithLang(req, res, {
                 template: template,
                 data: {
                     content: {

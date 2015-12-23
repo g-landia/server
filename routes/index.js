@@ -3,7 +3,10 @@ var express = require('express')
     ,config = require('nconf')
     ,db = require('../db')
     ,gText = require('../language')
-    ,mainTemplate = config.get('mainTemplate');//'templates/content/main/index';
+
+    ,mainTemplate = config.get('templates').content
+    ,renderWithLang = gText.renderWrap;
+
 
 
 /* GET home page. */ //EXAMPLE/////
@@ -11,15 +14,12 @@ var express = require('express')
 
 router.get('/', function(req, res) {
 
-    //res.render(mainTemplate, {getText: gText.language("ru")});
-
-
-
-    gText.wrap(req, res, {
+    renderWithLang(req, res, {
         template: mainTemplate,
         data: {
             //this key in the template
             title: "Hello",
+            text: db.langObj,
             req: req,
             content: {
                 exampleKey: "info"
@@ -30,11 +30,11 @@ router.get('/', function(req, res) {
 });
 
 //for update language
-/*router.post('/', function(req, res, next) {
-
+router.post('/', function(req, res, next) {
+    req.flash('testInfo', 'Flash work');
     //res.render(mainTemplate, {getText: gText.language("ru")});
-
-    gText.wrap(req, res, {
+    res.redirect('/');
+    /*gText.wrap(req, res, {
         template: mainTemplate,
         data: {
             //this key in the template
@@ -43,9 +43,9 @@ router.get('/', function(req, res) {
                 exampleKey: "info"
             }
         }
-    });
+    });*/
 
-});*/
+});
 
 
 

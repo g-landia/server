@@ -22,12 +22,6 @@ var connect = function(option){
     pool = mysql.createPool(opt);
 };
 
-/*var getInstance = function() {
-    if (!pool) {
-        throw new Error('Connect the pool first');
-    }
-    return pool;
-};*/
 /*withDb - it works as a wrapper
 * example:
 *
@@ -56,7 +50,7 @@ var withDb = function(option, func){
 };
 ////////////////////////////////////////////////////////
 
-var query = function (method, tableOrSql, props) {
+var query = function (method, tableOrSql, props, where) {
     return new Promise(function (resolve, reject) {
         pool.getConnection(function (err, connection) {
             // Adding mysql extra options
@@ -64,8 +58,14 @@ var query = function (method, tableOrSql, props) {
             mysqlUtilities.introspection(connection);
             // Query data and return promise
             if (typeof connection[method] == 'function') {
+                //connection.update(table, row, where, callback)
+                if(typeof where == 'object'){
+                    connection[method](tableOrSql, props, where, function(err, res){
+                        if(err) reject(err);
+                        else resolve(res);
+                    });
                  // query  SQL
-                if(typeof props === 'object') {
+                }else if(typeof props === 'object') {
                     connection[method](tableOrSql, props, function(err, res){
                         if (err) reject(err);
                         else resolve(res);
@@ -91,9 +91,18 @@ var query = function (method, tableOrSql, props) {
     });
 };
 
-exports.connect = connect;
-//exports.getInstance = getInstance;
-//exports.pool = pool;
+// loading language from DB to langObj
+var updateLanguage = function(){
+    return query('queryHash', 'SELECT * FROM keys_languages ORDER BY `name`', [])
+        .then(function(keys){
+            exports.langObj= keys; //all language'
+            return keys;
+        })
+};
+
+updateLanguage();
+
 exports.withDb = withDb;
+exports.updateLanguage = updateLanguage;
 exports.mainDB = DB;
 exports.query = query;
