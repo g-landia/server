@@ -13,6 +13,9 @@ var express = require('express')
 
 
 router.get('/', function(req, res) {
+    /*var query = req.query;
+    if(query.ln ){}
+    //(req.user)?*/
 
     renderWithLang(req, res, {
         template: mainTemplate,

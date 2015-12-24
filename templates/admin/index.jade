@@ -41,8 +41,8 @@ block content
             form
                 .row
                         .col-xs-12
-                            .col-xs-1 ID
-                            .col-xs-2 Name key
+                            .col-xs-0 ID
+                            .col-xs-3 Name key
                             .col-xs-4
                                 select.form-control(onchange="if (this.selectedIndex) this.form.submit ()" name='first_lang')
                                     option(value='en') Select language
@@ -73,9 +73,9 @@ block content
                 for k in text
 
                     form(method='POST').col-xs-12
-                        .col-xs-1= k.id
+                        div= k.id
 
-                        .col-xs-2
+                        .col-xs-3
                             input(type='hidden' name='id' value='#{k.id}')
                             input(type='text' name='name' required value='#{k.name}').form-control
                         .col-xs-4
@@ -95,8 +95,8 @@ block javascript
     script.
         var fieldKey =
                 '<form method="POST" class="col-xs-12">' +
-                    '<div class="col-xs-1">NEW</div>' +
-                    '<div class="col-xs-2">' +
+                    '<div>NEW</div>' +
+                    '<div class="col-xs-3">' +
                         '<input type="text" name="name" required class="form-control">' +
                     '</div>' +
                     '<div class="col-xs-4">' +

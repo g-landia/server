@@ -1494,8 +1494,8 @@ properly.
   transform: rotate(45deg);
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
-  transition:all0.2sease
-  -in-out;
+    transition: all 0.2s ease;
+    /*-in-out**/
 }
 .accordion p {
   font-size: 13px;

@@ -1,3 +1,5 @@
+
+
 (function($) {
     $('.accordion > li:eq(0) a').addClass('active').next().slideDown();
 
@@ -18,3 +20,4 @@
         j.preventDefault();
     });
 })(jQuery);
+
