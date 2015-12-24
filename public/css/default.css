@@ -19,7 +19,6 @@ c. Default Styles
    2. Misc
    3. Registration
    4. FAQ
-
 =====================================================================  */
 
 
@@ -182,7 +181,9 @@ p.lead {
 the body tag due to rendering problems in some browsers */
 em { font: 15px/30px 'opensans-italic', sans-serif; }
 strong, b {font: 16px/30px 'opensans-bold', sans-serif;}
-small {font-size: 14px;color: #fff;line-height: inherit;}
+small {font-size: 14px;color: #3a5795;line-height: inherit;}
+little {font-size: 14px;color: #fff;line-height: inherit;}
+
 
 /* Blockquotes */
 blockquote {
@@ -250,8 +251,8 @@ hr { border: solid #E8E8E8; border-width: 1px 0 0; clear: both; margin: 11px 0 3
 a, a:visited {
    text-decoration: none;
    outline: 0;
-   color: #555;
-   font-weight: 800;
+   color: #666;
+   font-weight: 500;
    -webkit-transition: color .3s ease-in-out;
    -moz-transition: color .3s ease-in-out;
    -o-transition: color .3s ease-in-out;
@@ -259,7 +260,7 @@ a, a:visited {
 }
 
 a:hover, a:focus { color:  #555; }
-p a, p a:visited { line-height: inherit; }
+p a, p a:visited {line-height: inherit;}
 
 
 /*  4. List  --------------------------------------------------------- */
@@ -439,7 +440,7 @@ textarea { min-height: 220px; }
 
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: 'Ã¢Å“â€œ';
+  content: 'ÃƒÂ¢Ã…â€œÃ¢â‚¬Å“';
   position: absolute;
   top: 3px;
   left: 4px;
@@ -603,8 +604,8 @@ label:hover:before {
 --------------------------------------------------------------------- */
 .bgrid-sixths [class*="column"]   { width: 16.66667%; }
 .bgrid-quarters [class*="column"] { width: 25%; }
-.bgrid-thirds [class*="column"]   { width: 33.33333%; }
-.bgrid-halves [class*="column"]   { width: 50%; }
+.bgrid-thirds [class*="column"]   { width: 35%; }
+.bgrid-halves [class*="column"]   { width: 65%; }
 
 [class*="bgrid"] [class*="column"] + [class*="column"]:last-child { float: left; }
 
@@ -884,7 +885,7 @@ properly.
 
 .big-profile-picture {
     margin-top: 2em;
-    margin-left: 4em;
+    margin-left: 6em;
     border: 4px solid #eee;
     width: 150px;
     height: 150px;
@@ -917,9 +918,9 @@ properly.
 
 .block {
     margin-bottom: 25px;
-    background: #3a5795;
+    background: #fff;
     border-radius: 5px;
-    border: 1px solid #eee;
+    border: 1px solid #dae1e6;
     box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
   }
 /
@@ -948,9 +949,9 @@ properly.
           margin: 25px 0 0px;
           font-size: 22px;
           text-align: center;
-          color: #fff;
+          color: #3a5795;
         }
-        .country{color:#fff;margin: 0;font-weight: 800;font-size: 16px;}
+        .country{color: #666;margin: 0;font-weight: 100;font-size: 16px;}
         
          .points{font-size:1em;margin: 0;text-align: center;color: #ccc;}
         
@@ -1418,7 +1419,7 @@ properly.
     width: 50%
   }
   .portfolio {
-    height: 80px;
+    height: 90px;
   }
 }
 
@@ -1427,7 +1428,7 @@ properly.
     width: 35%
   }
   .portfolio {
-    height: 100px;
+    height: 110px;
   }
 }
 
@@ -1436,7 +1437,7 @@ properly.
     width: 25%
   }
   .portfolio {
-    height: 75px;
+    height: 95px;
   }
 }
 
@@ -1445,7 +1446,7 @@ properly.
     width: 20%
   }
   .portfolio {
-    height: 150px;
+    height: 180px;
   }
 }
 /* Slide End*/
@@ -1502,5 +1503,6 @@ properly.
   line-height: 2;
   padding: 10px;
 }
+
 
 /* <-- FAQ End --> /*
