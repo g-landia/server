@@ -1,13 +1,12 @@
 var express = require('express')
     ,router = express.Router()
     ,config = require('nconf')
-    ,db = require('../db')
-    ,gText = require('../language')
-    ,admin = require('../plugins/admin/handler')
+    ,db = require('../../db')
+    ,gText = require('../../language')
+    ,admin = require('../../plugins/admin/handler')
     ,renderWithLang = gText.renderWrap
 
     ,templates = config.get('templates')
-    ,templateAdmin = templates.admin
     ,not_foundTemplate = templates.not_found;
 
 

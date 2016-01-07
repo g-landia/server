@@ -1,35 +1,14 @@
 extends layout
 
 // MIXIN
-mixin adminMenu()
-    if req.user
-        if req.user.rights == 'root'
-            li
-                a.smoothscroll(href='/admin?first_lang=en&second_lang=ru')!= getText('admin')
 
-mixin loginMenu()
-    if !req.user
-        ul.header-social
-            li
-                a(href='/login' style='color: #FFFFFF;')= getText('login')
-    else
-        ul.header-social
-            li
-                a(href='/logout' style='color: #FFFFFF;')= getText('logout')
-mixin language()
-    if req.session.guest && !req.user
-        if req.session.guest.ln == 'en'
-            li
-                a(href='/?ln=ru')
-                    img(src='images/russia.png')
-        else
-            li
-                a(href='/?ln=en')
-                    img(src='images/United-Kingdom.png')
+
+
+
 mixin image_feature()
     if !req.user
         if req.session.guest
-            if req.session.guest.ln == 'ru'
+            if req.session.guest.ln == 'ru'|| req.session.guest.ln  == 'ru-Ru'
                 img(src='images/feature-image-1-1.png', alt='steps')
             else
                 img(src='images/feature-image-1.png', alt='steps')
@@ -40,29 +19,12 @@ mixin image_feature()
         img(src='images/feature-image-1.png', alt='steps')
 
 
+
+
 /// END MIXIN
 
 block content
-    body
-    header
-        .logo
-            a.smoothscroll(href='#main')
-                img(alt='', src='images/logo.png')
-        nav#nav-wrap
-            a.mobile-btn(href='#nav-wrap', title='Show navigation') Show Menu
-            a.mobile-btn(href='#', title='Hide navigation') Hide Menu
-            ul#nav.nav
-                li
-                    a.smoothscroll(href='#inspiration')!= getText('whyJoin')
-                li
-                    a.smoothscroll(href='#about')!= getText('about')
-                li
-                    a(href='faq.html')!= getText('faq')
-                li
-                    a.smoothscroll(href='#subscribe')!= getText('joinUs')
-                +language()
-                +adminMenu()
-        +loginMenu()
+
     section#main
         .row
             .seven.columns
@@ -139,7 +101,7 @@ block content
                 p
                     little!= getText('byJoiningYouConfirmConditions')
                             a(href='terms.html')= getText('linkTermsConditions')
-                p
+                //p
                     a.button(href='/example_profile.html')= getText('examplePage')
     section#call-to-action
         .row
@@ -148,16 +110,4 @@ block content
             .eight.columns.pull-right
                 h2= getText('supportTheProject')
                 != getText('supportTheProjectDescription')
-    section#footer
-        footer
-            p.copyright © 2015 G-Landia | Made in St-Petersburg, Russia
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
-    script.
-        window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\\/script>')
-    script(type='text/javascript', src='js/jquery-migrate-1.2.1.min.js')
-    script(src='js/jquery.flexslider.js')
-    script(src='js/waypoints.js')
-    script(src='js/jquery.fittext.js')
-    script(src='js/jquery.fitvids.js')
-    script(src='js/imagelightbox.js')
-    script(src='js/main.js')
+

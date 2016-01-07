@@ -1,4 +1,45 @@
+doctype html
+html.no-js(lang='en')
+    head
+        meta(charset='utf-8')
+        title G-Landia
+        meta(name='description', content='')
+        meta(name='author', content='inkyotogrand')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        link(rel='stylesheet', href='css/default.css')
+        link(rel='stylesheet', href='css/layout.css')
+        link(rel='stylesheet', href='css/media-queries.css')
+        link(rel='shortcut icon', href='favicon.ico')
+    body
+        section#main
+            .row
+                .six.columns
+                    .main-text
+                        br
 
-h1= message
-h2 #{error.status}
-pre #{error.stack}
+                        h1 500
+                        h5(style='text-align: left') Internal Server Error!
+                        h4 Please try again later.
+
+                        small
+                            a(href='/')
+                                | Return to homepage
+                                i.fa.fa-angle-double-right
+                        h4(style='text-align: left') #{error.status}
+                        div(style='color: black; text-align: left')= message
+                        div(style='color: black; text-align: left') #{error.stack}
+                .four.pull-left.columns.main-media
+                    img(src='images/feature-image-6.png', alt='error')
+        section#footer
+            footer
+                p.copyright © 2015 G-Landia | Made in St-Petersburg, Russia
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+        script.
+            window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\\/script>')
+        script(type='text/javascript', src='js/jquery-migrate-1.2.1.min.js')
+        script(src='js/waypoints.js')
+        script(src='js/jquery.fittext.js')
+        script(src='js/jquery.fitvids.js')
+        script(src='js/imagelightbox.js')
+        script(src='js/main.js')
+

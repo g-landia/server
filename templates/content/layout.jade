@@ -1,41 +1,59 @@
+// MIXIN
+mixin loginMenu()
+    if !req.user
+        ul.header-social
+            li
+                a(href='/login' style='color: #FFFFFF;')= getText('login')
+    else
+        ul.header-social
+            li
+                a(href='/logout' style='color: #FFFFFF;')= getText('logout')
+
+mixin language()
+    if req.session.guest && !req.user
+        if req.session.guest.ln == 'en'
+            li
+                a(href='?ln=ru')
+                    img(src='images/russia.png')
+        else
+            li
+                a(href='?ln=en')
+                    img(src='images/United-Kingdom.png')
+
+mixin adminMenu()
+    // =>  shows when root users
+    if req.user
+        if req.user.rights == 'root'
+            li
+                a(href='/admin?first_lang=en&second_lang=ru')!= getText('admin')
+// END MIXIN
+
+
 doctype html
 html.no-js(lang='en')
     head
-
-        //
-          - Basic Page Needs
-          ==================================================
         meta(charset='utf-8')
-        title G-Landia - Welcome to the Land of Good
+        title= getText(title)
         meta(name='description', content='')
         meta(name='author', content='inkyotogrand')
-        //
-          Mobile Specific Metas
-          ==================================================
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         link(rel='stylesheet', href='css/default.css')
         link(rel='stylesheet', href='css/layout.css')
         link(rel='stylesheet', href='css/media-queries.css')
         link(rel='stylesheet', href='css/animate.css')
+        script(src='js/modernizr.js')
+        link(rel='shortcut icon', href='favicon.ico')
 
-        //timer
+        //TIMER CSS
             =================================================
         link(rel='stylesheet', href='css/style4.css')
         //if lte IE 8 link(rel='stylesheet', href='css/style4ie.css')
         //if gte IE 9 link(rel='stylesheet', href='css/style4ieM.css')
-        //
-          Script
-          ==================================================
-        script(src='js/modernizr.js')
-        //
-          Favicons
-          ==================================================
-        link(rel='shortcut icon', href='favicon.ico')
 
         // TIMER CODE
             ==================================================
         script(type='text/javascript').
-            year = 2015; month = 12; day = 31; hour= 23; minute= 59; sec= 59;
+            year = 2016; month = 1; day = 20; hour= 23; minute= 59; sec= 59;
             function CountBox() {
                 dateNow = new Date;
                 amount = dateFuture.getTime() - dateNow.getTime() + 5;
@@ -98,7 +116,49 @@ html.no-js(lang='en')
 
             // END TIMER CODE
 
+    body
+        header
+            .logo
+                a(class='#{smoothscroll}' href='/#main')
+                    img(alt='', src='images/logo.png')
+            nav#nav-wrap
+                a.mobile-btn(href='#nav-wrap', title='Show navigation') Show Menu
+                a.mobile-btn(href='#', title='Hide navigation') Hide Menu
+                ul#nav.nav
+                    li
+                        // => #{smoothscroll} - taken when need (from backEnd)
+                        a(class='#{smoothscroll}' href='/#inspiration')!= getText('whyJoin')
+                    li
+                        a(class='#{smoothscroll}' href='/#about')!= getText('about')
+                    li
+                        a(href='/faq')!= getText('faq')
+                    li
+                        a(class='#{smoothscroll} ' href='/#subscribe')!= getText('joinUs')
+                    +language()
+                    +adminMenu()
+            +loginMenu()
+        // BLOCKS
+        h1 #{smoothscroll}
+        block content
+        block login
+        // END BLOCKS
 
-    block content
-    block login
+        // FOOTER
+        section#footer
+            footer
+                p.copyright © 2015 G-Landia | Made in St-Petersburg, Russia
 
+        // SCRIPTS
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+        script.
+            window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\\/script>');
+        script(type='text/javascript', src='js/jquery-migrate-1.2.1.min.js')
+        script(src='js/jquery.flexslider.js')
+        script(src='js/waypoints.js')
+        script(src='js/jquery.fittext.js')
+        script(src='js/jquery.fitvids.js')
+        script(src='js/imagelightbox.js')
+        script(src='js/main.js')
+        // END SCRIPTS
+
+        block afterScript

@@ -4,8 +4,8 @@ var config         = require('nconf')
     ,renderWithLang = gText.renderWrap
 
     ,templates = config.get('templates')
-    ,templateAdmin = templates.admin
-    ,not_foundTemplate = templates.not_found;
+    ,templateAdmin = 'admin/index';
+    //,not_foundTemplate = templates.not_found;
 
 
 /*

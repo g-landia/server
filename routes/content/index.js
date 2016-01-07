@@ -1,15 +1,16 @@
 var express = require('express')
     ,router = express.Router()
     ,config = require('nconf')
-    ,db = require('../db')
-    ,gText = require('../language')
-
-    ,mainTemplate = config.get('templates').content
+    ,db = require('../../db')
+    ,gText = require('../../language')
     ,renderWithLang = gText.renderWrap;
 
 
 
 /* GET home page. */ //EXAMPLE/////
+
+
+
 
 
 router.get('/', function(req, res) {
@@ -18,12 +19,12 @@ router.get('/', function(req, res) {
     //(req.user)?*/
 
     renderWithLang(req, res, {
-        template: mainTemplate,
+        template: 'content/index',
         data: {
             //this key in the template
-            title: "Hello",
+            title: 'titleHomePage',
+            smoothscroll: 'smoothscroll',
             text: db.langObj,
-            req: req,
             content: {
                 exampleKey: "info"
             }
@@ -33,7 +34,7 @@ router.get('/', function(req, res) {
 });
 
 //for update language
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
     req.flash('testInfo', 'Flash work');
     //res.render(mainTemplate, {getText: gText.language("ru")});
     res.redirect('/');

@@ -64,7 +64,7 @@ var getText = function(language){
         if(!text){
             var valEn = (val)? val['en']: '';      //if no text in the selected language, then english
             return (valEn)? valEn
-                : (!keyText)? ''        //if  empty keyText, then return ''
+                : (!keyText || keyText == '')? ''        //if  empty keyText, then return ''
                 : '%' + keyText + '%';   //if not english, then return name key: '%nameKey%' - language and key is not defined
         } else return text
     }
@@ -120,6 +120,7 @@ var renderWrap = function(req, res, option){
         return;
     } else {
         //add session guest
+
         req.session.guest = {"ln": query.ln};
         language = query.ln
     }

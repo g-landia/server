@@ -1,0 +1,61 @@
+extends layout
+
+
+block content
+    section#main
+        .row
+            .six.columns
+                .main-text
+                    h3.subheader Frequently Asked Questions
+                    ul.accordion
+                        li
+                            a!= getText('what_is_gLandia')
+                            p!= getText('what_isGLandiaDescription')
+                        li
+                            a!= getText('what_isGOlympicGames')
+                            p!= getText('what_isGOlympicGamesDescription')
+                        li
+                            a!= getText('whichAreTheGenuineValues')
+                            p!= getText('whichAreTheGenuineValuesDescription')
+                        li
+                            a!= getText('who_isGLandiaFor')
+                            p!= getText('who_isGLandiaForDescription')
+                        li
+                            a!= getText('howOld_isGLandia')
+                            p!= getText('howOld_isGLandiaDescription')
+                        li
+                            a!= getText('where_is_itFrom')
+                            p!= getText('where_is_itFromDescription')
+                        li
+                            a!= getText('is_itReallyFree')
+                            p!= getText('is_itReallyFreeDescription')
+                        li
+                            a!= getText('howDoYouMakeMoneyOutOfThis')
+                            p!= getText('howDoYouMakeMoneyOutOfThisDescription')
+                        li
+                            a!= getText('howToBecomeMotivator')
+                            p!= getText('howToBecomeMotivatorDescription')
+                        li
+                            a!= getText('whatAreBenefitsOfBecomingMotivator')
+                            p!= getText('whatAreBenefitsOfBecomingMotivatorDescription')
+                        li
+                            a!= getText('whatDoWithGpoints')
+                            p!= getText('whatDoWithGpointsDescription')
+                        li
+                            a!= getText('whatHappens_ifBreakMyPromises')
+                            p!= getText('whatHappens_ifBreakMyPromisesDescription')
+                        li
+                            a!= getText('ifLieToYou')
+                            p!= getText('ifLieToYouDescription')
+            .six.columns.main-media
+                img(src='images/feature-image-5.png', alt='')
+
+
+
+
+
+block afterScript
+    // Accordion.js
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='js/index.js')
+    // Accordion.js End

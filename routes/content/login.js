@@ -3,10 +3,10 @@ var express = require('express')
     ,jade        = require('jade')
     ,router = express.Router()
     ,config = require('nconf')
-    ,userHandler = require('../plugins/users/handler')
+    ,userHandler = require('../../plugins/users/handler')
     ,authService = userHandler.authService
     ,template = "content/login"
-    ,gText = require('../language')
+    ,gText = require('../../language')
 
     ,renderWithLang = gText.renderWrap;
 

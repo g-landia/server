@@ -1,8 +1,8 @@
 var express = require('express')
     ,router = express.Router()
-    ,gText = require('../language')
+    ,gText = require('../../language')
     ,renderWithLang = gText.wrap
-    ,authService = require('../plugins/users/authService.js');
+    ,authService = require('../../plugins/users/authService.js');
 /*
 router.post('/', function(req, res){
 	authService.register(req,res,function(status,msg){
